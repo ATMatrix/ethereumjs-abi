@@ -36,3 +36,13 @@ console.log(abi.rawEncode([ 'address', 'uint256', 'address' ], [ "0xe11bd1032fe0
 
 
 console.log(abi.rawEncode([ 'address', 'address', 'address' ], [ "0xe11bd1032fe0d7343e8de21f92f050ae8462a7d7", "0x051fda7486480dd5abcf5dd742ef002a2ebb9ea0", "0x887834d3b8d450b6bab109c252df3da286d73ce4" ]).toString('hex'));
+
+
+console.log(abi.methodID('claimTokens', [ 'address' ]).toString('hex') + abi.rawEncode([ 'address' ], [ '0x0' ]).toString('hex'));
+
+
+console.log(abi.rawEncode([ 'address', 'address', 'address' ], [ "0xe11bd1032fe0d7343e8de21f92f050ae8462a7d7", "0x887834D3b8D450B6bAB109c252Df3DA286d73CE4", "0x051fda7486480dd5abcf5dd742ef002a2ebb9ea0" ]).toString('hex'));
+
+
+console.log("Official Trx index 3: Transfer 0.1 EOS to a address 0x69A009FFb0627d60Ae9D253346d25B86A6731069");
+console.log(abi.methodID('transfer', [ 'address', 'uint256' ]).toString('hex') + abi.rawEncode([ 'address', 'uint256' ], [ '0x69A009FFb0627d60Ae9D253346d25B86A6731069', "100000000000000000" ]).toString('hex'));
