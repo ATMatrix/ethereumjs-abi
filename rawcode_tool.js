@@ -9,9 +9,6 @@ console.log(abi.methodID('addOwner', [ 'address' ]).toString('hex') + abi.rawEnc
 
 console.log(abi.methodID('transfer', [ 'address', 'uint256' ]).toString('hex') + abi.rawEncode([ 'address', 'uint256' ], [ '0x69A009FFb0627d60Ae9D253346d25B86A6731069', "10000000000000000" ]).toString('hex'));
 
-console.log("encode withdraw from contribution wallet:");
-//console.log(abi.methodID('withdraw', []).toString('hex') + abi.rawEncode([], []).toString('hex'));
-console.log(abi.methodID('withdraw', []).toString('hex'));
 
 console.log("encode collectTokens for AngelTokenHolder:\n");
 console.log(abi.methodID('collectTokens', []).toString('hex'));
@@ -52,5 +49,11 @@ var decoded = abi.rawDecode(['address', 'uint256'], new Buffer("0000000000000000
 console.log(decoded[0].toString('hex'));
 console.log(decoded[1].toString());
 
-console.log("Official Trx index 3: Transfer 0.1 EOS to a address 0x69A009FFb0627d60Ae9D253346d25B86A6731069");
+console.log("Official Tx index 3: Transfer 0.1 EOS to a address 0x69A009FFb0627d60Ae9D253346d25B86A6731069");
 console.log(abi.methodID('transfer', [ 'address', 'uint256' ]).toString('hex') + abi.rawEncode([ 'address', 'uint256' ], [ '0x69A009FFb0627d60Ae9D253346d25B86A6731069', "100000000000000000" ]).toString('hex'));
+
+console.log("--------------------");
+
+console.log("Official Tx index 4: Withdraw from contribution wallet:");
+console.log(abi.methodID('withdraw', []).toString('hex') + abi.rawEncode([], []).toString('hex'));
+console.log(abi.methodID('withdraw', []).toString('hex'));
