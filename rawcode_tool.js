@@ -57,3 +57,12 @@ console.log("--------------------");
 console.log("Official Tx index 4: Withdraw from contribution wallet:");
 console.log(abi.methodID('withdraw', []).toString('hex') + abi.rawEncode([], []).toString('hex'));
 console.log(abi.methodID('withdraw', []).toString('hex'));
+
+console.log("Official Tx index 5: collect half from angel token holder.");
+console.log(abi.methodID('collectTokens', []).toString('hex') + abi.rawEncode([], []).toString('hex'));
+
+console.log("Official Tx index 6: Transfer 1 ATT to a address 0xc62f5D8fBc03C6791ff2E93289c59aAf94Fa0BCc");
+console.log(abi.methodID('transfer', [ 'address', 'uint256' ]).toString('hex') + abi.rawEncode([ 'address', 'uint256' ], [ '0xc62f5D8fBc03C6791ff2E93289c59aAf94Fa0BCc', "1000000000000000000" ]).toString('hex'));
+
+console.log("Official Tx index 7: Transfer 6660545 ATT to a address 0xc62f5D8fBc03C6791ff2E93289c59aAf94Fa0BCc");
+console.log(abi.methodID('transfer', [ 'address', 'uint256' ]).toString('hex') + abi.rawEncode([ 'address', 'uint256' ], [ '0xc62f5D8fBc03C6791ff2E93289c59aAf94Fa0BCc', "6660545000000000000000000" ]).toString('hex'));
