@@ -9,9 +9,6 @@ console.log(abi.methodID('addOwner', [ 'address' ]).toString('hex') + abi.rawEnc
 
 console.log(abi.methodID('transfer', [ 'address', 'uint256' ]).toString('hex') + abi.rawEncode([ 'address', 'uint256' ], [ '0x69A009FFb0627d60Ae9D253346d25B86A6731069', "10000000000000000" ]).toString('hex'));
 
-console.log("encode withdraw from contribution wallet:");
-//console.log(abi.methodID('withdraw', []).toString('hex') + abi.rawEncode([], []).toString('hex'));
-console.log(abi.methodID('withdraw', []).toString('hex'));
 
 console.log("encode collectTokens for AngelTokenHolder:\n");
 console.log(abi.methodID('collectTokens', []).toString('hex'));
@@ -52,8 +49,20 @@ var decoded = abi.rawDecode(['address', 'uint256'], new Buffer("0000000000000000
 console.log(decoded[0].toString('hex'));
 console.log(decoded[1].toString());
 
-console.log("Official Trx index 3: Transfer 0.1 EOS to a address 0x69A009FFb0627d60Ae9D253346d25B86A6731069");
+console.log("Official Tx index 3: Transfer 0.1 EOS to a address 0x69A009FFb0627d60Ae9D253346d25B86A6731069");
 console.log(abi.methodID('transfer', [ 'address', 'uint256' ]).toString('hex') + abi.rawEncode([ 'address', 'uint256' ], [ '0x69A009FFb0627d60Ae9D253346d25B86A6731069', "100000000000000000" ]).toString('hex'));
 
+console.log("--------------------");
 
-console.log(abi.methodID('transfer', [ 'address', 'uint256' ]).toString('hex') + abi.rawEncode([ 'address', 'uint256' ], [ '0x7f721ab4764d883a886bfeb524df8ddc8ecc5fe9', "2664779230000000000000000" ]).toString('hex'));
+console.log("Official Tx index 4: Withdraw from contribution wallet:");
+console.log(abi.methodID('withdraw', []).toString('hex') + abi.rawEncode([], []).toString('hex'));
+console.log(abi.methodID('withdraw', []).toString('hex'));
+
+console.log("Official Tx index 5: collect half from angel token holder.");
+console.log(abi.methodID('collectTokens', []).toString('hex') + abi.rawEncode([], []).toString('hex'));
+
+console.log("Official Tx index 6: Transfer 1 ATT to a address 0xc62f5D8fBc03C6791ff2E93289c59aAf94Fa0BCc");
+console.log(abi.methodID('transfer', [ 'address', 'uint256' ]).toString('hex') + abi.rawEncode([ 'address', 'uint256' ], [ '0xc62f5D8fBc03C6791ff2E93289c59aAf94Fa0BCc', "1000000000000000000" ]).toString('hex'));
+
+console.log("Official Tx index 7: Transfer 6660545 ATT to a address 0xc62f5D8fBc03C6791ff2E93289c59aAf94Fa0BCc");
+console.log(abi.methodID('transfer', [ 'address', 'uint256' ]).toString('hex') + abi.rawEncode([ 'address', 'uint256' ], [ '0xc62f5D8fBc03C6791ff2E93289c59aAf94Fa0BCc', "6660545000000000000000000" ]).toString('hex'));
