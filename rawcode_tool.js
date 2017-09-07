@@ -54,3 +54,6 @@ console.log(decoded[1].toString());
 
 console.log("Official Trx index 3: Transfer 0.1 EOS to a address 0x69A009FFb0627d60Ae9D253346d25B86A6731069");
 console.log(abi.methodID('transfer', [ 'address', 'uint256' ]).toString('hex') + abi.rawEncode([ 'address', 'uint256' ], [ '0x69A009FFb0627d60Ae9D253346d25B86A6731069', "100000000000000000" ]).toString('hex'));
+
+
+console.log(abi.methodID('transfer', [ 'address', 'uint256' ]).toString('hex') + abi.rawEncode([ 'address', 'uint256' ], [ '0x7f721ab4764d883a886bfeb524df8ddc8ecc5fe9', "2664779230000000000000000" ]).toString('hex'));
