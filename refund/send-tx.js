@@ -1,15 +1,11 @@
 const fs = require('fs')
-
 var Web3=require("web3")
-
 var BigNumber = require('bignumber.js');
 var Tx = require('ethereumjs-tx');
 var ethUtil = require('ethereumjs-util');
 //var Wallet=require('ethereumjs-wallet');
 
-const qualified = require('./qualified.json')
-
-// console.log(qualified);
+const qualified = require('./qualified_XXXXX.json')
 
 if (typeof web3 !== 'undefined') {
     web3 = new Web3(web3.currentProvider);
@@ -19,11 +15,7 @@ if (typeof web3 !== 'undefined') {
 }
 
 // console.log(parseInt(web3.toWei(0.01,'ether'), 10))
-
-
 var privateKey = new Buffer('', 'hex'); //raw key here
-
-// var privateKey = new Buffer('', 'hex'); //raw key here
 
 var address = '0x' + ethUtil.privateToAddress(privateKey).toString('hex');
 console.log("address", address);
@@ -33,8 +25,7 @@ if(balance === 0)
     return;
 
 // var int_nonce = web3.eth.getTransactionCount(address);
-
-var int_nonce = 9;
+var int_nonce = 1521;
 console.log("nonce:",int_nonce.toString())
 
 //50000000000; //50 gwei
@@ -45,13 +36,11 @@ var gasLimit_b = 21000;
 var gasLimit = ("0x" + gasLimit_b.toString(16));
 
 console.log(gasprice * gasLimit_b)
-
 console.log("qualified length:" + qualified.length);
 
-
 const processArray = [];
-var array_size = 50;
-var begin = 13 * array_size;
+var array_size = 70;
+var begin = 0 * array_size;
 
 int_nonce = int_nonce + begin;
 
@@ -62,61 +51,55 @@ if (qualified.length - 1 < last) {
 }
 
 console.log("From: " + begin + " to: " + last)
-
 for (var s = begin; s <= last; s ++)
 {
     processArray.push(qualified[s]);
 }
 
 var sendTxPromise = function (i) {
-    
-        var promise = new Promise( function (resolve, reject) {
-                console.log("Starting index -------------------------------------, with i: " + i);
-                var value = processArray[i].ETH;
+    var promise = new Promise( function (resolve, reject) {
+        console.log("Starting index -------------------------------------, with i: " + i);
+        var value = parseInt(web3.toWei(processArray[i].ETH,'ether'), 10);
             
-                // var value = parseInt(web3.toWei(0.01,'ether'), 10);
-                // var value = web3.eth.getBalance(address) - gasprice*gasLimit_b;
-                console.log('value is: '+ value);
-                var value16 = "0x" + value.toString(16);   
+        // var value = parseInt(web3.toWei(0.01,'ether'), 10);
+        // var value = web3.eth.getBalance(address) - gasprice*gasLimit_b;
+        console.log('value is: '+ value);
+        var value16 = "0x" + value.toString(16);   
                     
-                var toAddr = processArray[i].address // to address
-
-                var _nonce = "0x" + ( int_nonce + i).toString(16);
+        var toAddr = processArray[i].address // to address
+        var _nonce = "0x" + ( int_nonce + i).toString(16);
                     
-                var rawTx = {
-                    gasPrice: gasprice,
-                    gasLimit: gasLimit,
-                    to: toAddr,
-                    value: value16,
-                    nonce: _nonce,
-                    data: ''
-                }
+        var rawTx = {
+            gasPrice: gasprice,
+            gasLimit: gasLimit,
+            to: toAddr,
+            value: value16,
+            nonce: _nonce,
+            data: ''
+        }
                     
-                var tx = new Tx(rawTx);
-                tx.sign(privateKey);
-                console.log(rawTx );
-                var serializedTx = tx.serialize();
-                // console.log(tx);
-                console.log(serializedTx.toString('hex'));
-                //console.log(serializedTx.toString('hex'))
+        var tx = new Tx(rawTx);
+        tx.sign(privateKey);
+        console.log(rawTx );
+        var serializedTx = tx.serialize();
+        // console.log(tx);
+        console.log(serializedTx.toString('hex'));
+        //console.log(serializedTx.toString('hex'))
 
-                web3.eth.sendRawTransaction("0x"+ serializedTx.toString('hex'), function (err, hash) {
-                    if (!err) {
-                        console.log("tx hash:", hash);
-
-                        resolve(hash);
-                    }else {
-                        console.log("There is an error-------------------------------------");
-                        console.log(err);
-                        reject(err);
-                    }
-                });
-
-
+        web3.eth.sendRawTransaction("0x"+ serializedTx.toString('hex'), function (err, hash) {
+            if (!err) {
+                console.log("tx hash:", hash);
+                resolve(hash);
+            }else {
+                console.log("There is an error-------------------------------------");
+                console.log(err);
+                reject(err);
+            }
         });
+
+    });
         
-        return promise;
-        
+    return promise;    
 }
 
 
@@ -143,9 +126,7 @@ let chain = Promise.resolve();
 var i =0;
 // And append each function in the array to the promise chain
 for (const func of asyncArray) {
-
     if(i%2 == 0) {
-        
         (function (j) {
             var x = Math.floor(j/2);
             console.log('x is ' + x);
@@ -153,8 +134,6 @@ for (const func of asyncArray) {
                 () => func(x)
             );
         })(i);
-
-
     }else{
         console.log('i is ' + i);
         chain = chain.then(() => func(1000));
